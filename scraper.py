@@ -51,6 +51,8 @@ styleData = []
 
 print("Getting style guide content")
 
+errors = False
+
 def scrapeEntry(s):
 	# print(s)
 	if "<br>" in s:
@@ -83,6 +85,9 @@ for url in urls:
 	
 	print("list of entry locations", headerLocs)
 	#print headerLocs[len(headerLocs)-1], len(pars)
+
+	if not headerLocs:
+		errors = True
 
 	for i in range(0, len(headerLocs)):
 		data = {}
@@ -160,10 +165,13 @@ for url in urls:
 
 final = {"data": styleData, "lastUpdated": currDate + " " + currTime}
 
+if not errors:
+	syncData(json.dumps(final, indent=4), "australia/2014/styleguide", "style-guide.json")
+	
 with open('style-guide.json', 'w') as f:
 	json.dump(final, f, indent=4)
 
-syncData(json.dumps(final, indent=4), "australia/2014/styleguide", "style-guide.json")
+
 
 # output = StringIO.StringIO()
 # output.write('{"data":')
