@@ -77,11 +77,11 @@ for url in urls:
 
 	for parNo, par in enumerate(pars):
 		# print(lxml.html.tostring(par))
-		if 'class="css-38z03z"><strong>' in lxml.html.tostring(par).decode("utf-8"):
+		if '"><strong>' in lxml.html.tostring(par).decode("utf-8"):
 			print("Actual entry in this paragraph")
 			headerLocs.append(parNo)
 	
-	#print "list of entry locations", headerLocs		 
+	print("list of entry locations", headerLocs)
 	#print headerLocs[len(headerLocs)-1], len(pars)
 
 	for i in range(0, len(headerLocs)):
